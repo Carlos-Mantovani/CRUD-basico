@@ -1,5 +1,23 @@
 var dados = []
 
+function ApagaRegistro(id) {
+    let _confirm = confirm("Deseja realmente excluir esse registro?")
+    //verifica se o usuário deseja realmente deletar o registro e caso sim, remove os dados do registro clicado do array dados, depois atualiza a tabela
+    if(_confirm){
+        for(let i = 0; i < dados.length; i++) {
+            if(dados[i].ID == id){
+                dados.splice(i, 1)
+            }
+        }
+
+        PopulaTabela()
+    }
+}
+
+function EditaRegistro(id) {
+
+}
+
 //remove os objetos anteriores da tbody e exibe os dados de dentro da array dados no lugar
 function PopulaTabela() {
     if(Array.isArray(dados)) {
@@ -16,7 +34,9 @@ function PopulaTabela() {
                 <td>${item.sobrenome}</td>
                 <td>${item.dataNascimento}</td>
                 <td>${item.formacao}</td>
-            </tr>`)
+                <td><button type="button" class="btn btn-primary"><i class="fa-solid fa fa-edit"></i></button></td>
+                <td><button type="button" class="btn btn-danger" onclick="javascript: ApagaRegistro(${item.ID});"><i class="fa fa-trash"></i></button></td>
+                </tr>`)
         })
     }
 }
